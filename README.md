@@ -1,2 +1,2 @@
-# git-operations
+# git-ops
 Git Operations
