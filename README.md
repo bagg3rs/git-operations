@@ -1,3 +1,4 @@
+[![Renovate](https://github.com/bagg3rs/git-ops/actions/workflows/renovate.yml/badge.svg)](https://github.com/bagg3rs/git-ops/actions/workflows/renovate.yml)
 # git-ops
  "Git as a single source of truth for declarative infrastructure and applications" [Weave.works](https://www.weave.works/technologies/gitops/)
 
