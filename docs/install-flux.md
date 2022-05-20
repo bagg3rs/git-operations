@@ -198,7 +198,7 @@ flux create source git monitoring \
   --interval=30m \
   --url=https://github.com/fluxcd/flux2 \
   --branch=main \
-  --export > ./clusters/staging/flux-system/apps/staging/kube-prometheus/monitor-kustomization.yaml
+  --export > ./clusters/staging/monitor-kustomization.yaml
 
 flux create kustomization monitoring-config \
   --interval=1h \
@@ -207,4 +207,4 @@ flux create kustomization monitoring-config \
   --path="./manifests/monitoring/monitoring-config" \
   --health-check="Deployment/grafana.flux-system" \
   --health-check="Deployment/prometheus.flux-system" \
- --export > ./clusters/staging/flux-system/apps/staging/kube-prometheus/monitor-kustomization.yaml
+ --export > ./clusters/staging/monitor-kustomization.yaml
