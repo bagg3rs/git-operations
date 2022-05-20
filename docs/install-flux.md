@@ -1,17 +1,19 @@
 # FluxCD
 
+Add GitHub SSH key to Node!
 Export your credentials 
 Export your GitHub personal access token and username:
 
 export GITHUB_TOKEN=<your-token>
 export GITHUB_USER=<your-username>
 
+This next step bootstraps Kubernetes by connecting to your GitHub repository and creating the required cluster folders and mana
 flux bootstrap github \
-  --owner=$GITHUB_USER \
+  --owner=bagg3rs \
   --repository=git-ops \
   --branch=main \
-  --path=./clusters/k3s-cluster \
-  --personal
+  --path=./clusters/staging \
+  --personal \
 
 ## Secrets - Sealed Secrets
 
@@ -188,3 +190,20 @@ Once the manifests have been pushed to the Git repository, the following happens
 * kustomize-controller applies the SealedSecret and the Deployment manifests
 * sealed-secrets controller decrypts the SealedSecret and creates a Kubernetes Secret
 * kubelet creates the pods and mounts the secret as a volume or env variable inside the app container
+
+## Install kube-prometheus stack
+
+flux create source git monitoring \
+  --interval=30m \
+  --url=https://github.com/fluxcd/flux2 \
+  --branch=main \
+  --export > ./apps/kube-prometheus/monitor-source.yaml
+
+flux create kustomization monitoring-config \
+  --interval=1h \
+  --prune=true \
+  --source=monitoring \
+  --path="./manifests/monitoring/monitoring-config" \
+  --health-check="Deployment/grafana.flux-system" \
+  --health-check="Deployment/prometheus.flux-system" \
+ --export > ./apps/kube-prometheus/monitor-kustomization.yaml
