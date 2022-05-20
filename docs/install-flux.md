@@ -193,6 +193,7 @@ Once the manifests have been pushed to the Git repository, the following happens
 
 ## Install kube-prometheus stack
 
+Use export to to check in the kustomization files into git.
 flux create source git monitoring \
   --interval=30m \
   --url=https://github.com/fluxcd/flux2 \
