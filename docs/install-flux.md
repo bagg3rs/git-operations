@@ -208,3 +208,11 @@ flux create kustomization monitoring-config \
   --health-check="Deployment/grafana.flux-system" \
   --health-check="Deployment/prometheus.flux-system" \
  --export > ./clusters/staging/monitor-kustomization.yaml
+
+ flux create kustomization podinfo \
+  --target-namespace=default \
+  --source=podinfo \
+  --path="./kustomize" \
+  --prune=true \
+  --interval=5m \
+  --export > ./clusters/staging/podinfo-kustomization.yaml
